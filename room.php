@@ -1,3 +1,10 @@
+<?php
+include('connection.php')
+$query = "SELECT * FROM room" or die(mysqli_error());
+$result = mysqli_query($con,$query);
+
+?>
+
 <html>
 
 <head>
@@ -13,14 +20,15 @@
       <div class="col-3 mt-5 bg-white">
         <a href="index.html">กลับสู่หน้าหลัก</a>
         <ul class="nav flex-column">
-          <l1> ยืมหนังสือ </l1>
-          <l1> จองหนังสือ </l1>
-          <a href="bookroom.html"> จองห้อง </a>
-          <l1> โปรแกรมจองห้อง </l1>
-          <l1> เพิ่มสมาชิก </l1>
-          <l1> รายชื่อสมาชิก </l1>
-          <l1> เพิ่มสมาชิกเข้า Blacklist </l1>
-          <l1> รายชื่อ Blacklist </l1>
+          <l1><a href="index.html">กลับสู่หน้าหลัก</a></l1>
+          <l1><a href="borrowbook.html">ยืมหนังสือ</a></l1>
+          <l1><a href="bookbook.html">จองหนังสือ</a></l1>
+          <l1><a href="bookroom.html">จองห้อง</a></l1>
+          <l1><a href="room.html">โปรแกรมจองห้อง</a></l1>
+          <l1><a href="addmember.html">เพิ่มสมาชิก</a></l1>
+          <l1><a href="member.php">รายชื่อสมาชิก</a></l1>
+          <l1><a href="addBlacklist.html">เพิ่มสมาชิกเข้า Blacklist</a></l1>
+          <l1><a href="blacklist.html">รายชื่อ Blacklist</a></l1>
         </ul>
       </div>
 
@@ -49,13 +57,18 @@
         <div class="container-fluid">
           <div class="row">
             <!-- card here -->
-            <div class="col-3 m-2">
-              <div class="card bg-primary">
-                <div class="card-body">
-                  <p>1</p>
-                </div>
-              </div>
-            </div>
+            <?php
+            while($row = mysqli_fetch_array($result)){
+              echo <div class="col-3 m-2">
+              echo <div class="card bg-primary">
+              echo  <div class="card-body">
+              echo    <p>.$row['Room_ID'].</p>
+              echo  </div>
+              echo </div>
+              echo </div>
+            }
+            ?>
+            
             <div class="col-3 m-2">
               <div class="card bg-primary">
                 <div class="card-body">

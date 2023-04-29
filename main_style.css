@@ -1,15 +1,20 @@
 body {
   background-image: url('https://images.wallpaperscraft.com/image/single/library_books_shelving_199606_1920x1080.jpg');
+  font-family: 'Kanit', sans-serif !important;
 }
 
-l1:hover {
+.side-menu:hover {
   background-color: gray;
 }
 
-h3 {
-  color: ;
+.side-menu-text {
+  color: black;
 }
 
-.container-fluid .row {
+.side-menu-link:link {
+  text-decoration: none;
+}
+
+.side-bar {
   height: 100%;
 }
