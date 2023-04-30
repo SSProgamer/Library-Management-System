@@ -1,8 +1,18 @@
 <?php
-include('connection.php')
-$query = "SELECT * FROM room" or die(mysqli_error());
+include('connection.php');
+$query = "SELECT * FROM room";
 $result = mysqli_query($con,$query);
 
+if($_POST['submit']){
+  $start = $_POST['start'];
+  $end = $_POST['end'];
+  $day = $_POST['day'];
+  // echo $day;
+  // echo "clicked";
+  $query = "SELECT * FROM room_booking WHERE RB_Date = $day && Start_Time between $start and $end";
+  $result = mysqli_query($con, $query);
+
+}
 ?>
 
 <html>
@@ -36,15 +46,16 @@ $result = mysqli_query($con,$query);
       <div class="col">
         <h2>สถานะการจองห้องประชุม</h2>
         <!-- ฟอร์มเลือกวัน และเวลาที่จะจอง-->
-        <form>
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
           <div>
             วันที่
             <input type="date" name="day">
             ตั้งแต่
-            <input type="time" name="startdate">
+            <input type="time" name="start">
             ถึง
-            <input type="time" name="enddate">
+            <input type="time" name="end">
+            <input type="submit" name="submit" value="ตรวจสอบ">
           </div>
           <!-- <div><input type="text" name=""></div>
 
@@ -59,44 +70,22 @@ $result = mysqli_query($con,$query);
             <!-- card here -->
             <?php
             while($row = mysqli_fetch_array($result)){
-              echo <div class="col-3 m-2">
-              echo <div class="card bg-primary">
-              echo  <div class="card-body">
-              echo    <p>.$row['Room_ID'].</p>
-              echo  </div>
-              echo </div>
-              echo </div>
+              echo '<div class="col-3 m-2">' ;
+              echo '<div class="card bg-primary">';
+              echo  '<div class="card-body">';
+              echo    '<p>'.$row['Room_ID'].'</p>';
+              echo  '</div>';
+              echo '</div>';
+              echo '</div>';
             }
             ?>
-            
-            <div class="col-3 m-2">
+            <!-- <div class="col-3 m-2">
               <div class="card bg-primary">
                 <div class="card-body">
                   <p>1</p>
                 </div>
               </div>
-            </div>
-            <div class="col-3 m-2">
-              <div class="card bg-primary">
-                <div class="card-body">
-                  <p>1</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-3 m-2">
-              <div class="card bg-primary">
-                <div class="card-body">
-                  <p>1</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-3 m-2">
-              <div class="card bg-primary">
-                <div class="card-body">
-                  <p>1</p>
-                </div>
-              </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

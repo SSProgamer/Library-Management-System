@@ -1,12 +1,7 @@
 <?php 
-    // Create connection
-    $connect = new mysqli('localhost', 'root', '', 'Library-Management-System');
-    // Check Connection
-    if ($connect->connect_error) {
-        die("Something wrong.: " . $connect->connect_error);
-      }
-    $sql = "SELECT * FROM Member";
-    $result = $connect->query($sql);
+    include('connection.php');
+    $sql = "SELECT * FROM `member`";
+    $result = mysqli_query($con, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +27,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php while($row = $result->fetch_assoc()): ?>
+                <?php while($row = mysqli_fetch_array($result)){ ?>
                     <tr>
                         <td><?php echo $row['Member_ID']; ?></td>
                         <td><?php echo $row['Name'];?></td>
@@ -41,7 +36,7 @@
                         <td><?php echo $row['Email']; ?></td>
                       <td><?php echo $row['Birth_Date']; ?></td>
                     </tr>
-                <?php endwhile ?>
+                <?php  } ?>
             </tbody>
         </table>
 
