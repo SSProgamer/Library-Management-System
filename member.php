@@ -13,7 +13,13 @@
     <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
 <body>
-    <div class="container">
+<div class="container-fluid side-bar">
+    <div class="row side-bar">
+    <?php
+    include('navbar.php');
+  ?>
+    <div class="col bg-light bg-opacity-75">
+    <a href="index.php">กลับไปหน้าหลัก</a>
         <h1>รายชื่อสมาชิก</h1>
         <table>
             <thead>

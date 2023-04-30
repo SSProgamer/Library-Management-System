@@ -1,3 +1,4 @@
+
 <html>
 
 <head>
@@ -13,9 +14,17 @@
 </head>
 
 <body>
+  
   <div class="container-fluid side-bar">
     <div class="row side-bar">
-      <div class="col-3 bg-light">
+    <?php
+    include('navbar.php');
+  ?>
+  <div class="col bg-light bg-opacity-75">
+    <h1>ยินดีต้อนรับเข้าสู่ระบบสารสนเทศในห้องสมุด</h1>
+    
+  </div>
+      <!-- <div class="col-3 bg-light">
         <h1>Library</h1>
         <h1>Management</h1>
         <h1>System</h1>
@@ -48,9 +57,10 @@
               <h4 class="side-menu-text">Login</h4>
             </a></l1>
         </ul>
-      </div>
+      </div> -->
     </div>
   </div>
+  
 </body>
 
 </html>

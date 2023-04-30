@@ -44,10 +44,6 @@ if($_POST['submit']){
   else{
     echo '<script>alert("มีคนจองแล้ว")</script>';
   }
-  
-  
-
-  
 
 }
 
@@ -62,22 +58,13 @@ if($_POST['submit']){
 </head>
 
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-3 bg-light">
-        <ul class="nav flex-column">
-          <l1><a href="index.html">กลับสู่หน้าหลัก</a></l1>
-          <l1><a href="borrowbook.html">ยืมหนังสือ</a></l1>
-          <l1><a href="bookbook.html">จองหนังสือ</a></l1>
-          <l1><a href="bookroom.html">จองห้อง</a></l1>
-          <l1><a href="room.html">โปรแกรมจองห้อง</a></l1>
-          <l1><a href="addmember.html">เพิ่มสมาชิก</a></l1>
-          <l1><a href="member.php">รายชื่อสมาชิก</a></l1>
-          <l1><a href="addBlacklist.php">เพิ่มสมาชิกเข้า Blacklist</a></l1>
-          <l1><a href="blacklist.html">รายชื่อ Blacklist</a></l1>
-        </ul>
-      </div>
-      <div class="col-9">
+<div class="container-fluid side-bar">
+    <div class="row side-bar">
+    <?php
+    include('navbar.php');
+  ?>
+      <div class="col-9 bg-light bg-opacity-75">
+      <a href="index.php">กลับไปหน้าหลัก</a>
       <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <h2>จองห้อง</h2>
         <div class="row">

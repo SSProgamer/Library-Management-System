@@ -25,25 +25,15 @@ if($_POST['submit']){
 
 <body>
   <!-- <h1>หิวตีนวัยรุ่นเมื่อไหร่จะโดนสักที</h1> -->
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-3 mt-5 bg-white">
-        <a href="index.html">กลับสู่หน้าหลัก</a>
-        <ul class="nav flex-column">
-          <l1><a href="index.html">กลับสู่หน้าหลัก</a></l1>
-          <l1><a href="borrowbook.html">ยืมหนังสือ</a></l1>
-          <l1><a href="bookbook.html">จองหนังสือ</a></l1>
-          <l1><a href="bookroom.html">จองห้อง</a></l1>
-          <l1><a href="room.html">โปรแกรมจองห้อง</a></l1>
-          <l1><a href="addmember.html">เพิ่มสมาชิก</a></l1>
-          <l1><a href="member.php">รายชื่อสมาชิก</a></l1>
-          <l1><a href="addBlacklist.html">เพิ่มสมาชิกเข้า Blacklist</a></l1>
-          <l1><a href="blacklist.html">รายชื่อ Blacklist</a></l1>
-        </ul>
-      </div>
+  <div class="container-fluid side-bar">
+    <div class="row side-bar">
+    <?php
+    include('navbar.php');
+  ?>
 
       <!-- this column shown content or information -->
-      <div class="col">
+      <div class="col bg-light bg-opacity-75">
+      <a href="index.php">กลับไปหน้าหลัก</a>
         <h2>สถานะการจองห้องประชุม</h2>
         <!-- ฟอร์มเลือกวัน และเวลาที่จะจอง-->
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">

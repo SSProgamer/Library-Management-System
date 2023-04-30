@@ -9,48 +9,14 @@
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row side-bar">
-            <div class="col-3 bg-light">
-                <h1>Library</h1>
-                <h1>Management</h1>
-                <h1>System</h1>
-                <ul class="nav flex-column">
-                    <l1 class="p-2 border-top border-bottom side-menu"><a class="side-menu-link" href="index.html">
-                            <h4 class="side-menu-text">กลับสู่หน้าหลัก</h4>
-                        </a></l1>
-                    <l1 class="p-2 border-top border-bottom side-menu"><a class="side-menu-link" href="borrowbook.html">
-                            <h4 class="side-menu-text">ยืมหนังสือ</h4>
-                        </a></l1>
-                    <l1 class="p-2 border-top border-bottom side-menu"><a class="side-menu-link" href="bookbook.html">
-                            <h4 class="side-menu-text">จองหนังสือ</h4>
-                        </a></l1>
-                    <l1 class="p-2 border-top border-bottom side-menu"><a class="side-menu-link" href="bookroom.html">
-                            <h4 class="side-menu-text">จองห้อง</h4>
-                        </a></l1>
-                    <l1 class="p-2 border-top border-bottom side-menu"><a class="side-menu-link" href="room.html">
-                            <h4 class="side-menu-text">โปรแกรมจองห้อง</h4>
-                        </a></l1>
-                    <l1 class="p-2 border-top border-bottom side-menu"><a class="side-menu-link" href="addmember.html">
-                            <h4 class="side-menu-text">เพิ่มสมาชิก</h4>
-                        </a></l1>
-                    <l1 class="p-2 border-top border-bottom side-menu"><a class="side-menu-link" href="member.php">
-                            <h4 class="side-menu-text">รายชื่อสมาชิก</h4>
-                        </a></l1>
-                    <l1 class="p-2 border-top border-bottom side-menu"><a class="side-menu-link"
-                            href="addBlacklist.php">
-                            <h4 class="side-menu-text">เพิ่มสมาชิกเข้า Blacklist</h4>
-                        </a></l1>
-                    <l1 class="p-2 border-top border-bottom side-menu"><a class="side-menu-link" href="blacklist.html">
-                            <h4 class="side-menu-text">รายชื่อ Blacklist</h4>
-                        </a></l1>
-                  <l1 class="p-2 border-top side-menu"><a class="side-menu-link" href="login.html">
-                            <h4 class="side-menu-text">Login</h4>
-                        </a></l1>
-                </ul>
-            </div>
+<div class="container-fluid side-bar">
+    <div class="row side-bar">
+    <?php
+    include('navbar.php');
+  ?>
             <!-- this column shown content or information -->
             <div class="col-9">
+            <a href="index.php">กลับไปหน้าหลัก</a>
                 <div class="container side-bar bg-light bg-opacity-75">
                     <h2 class="p-3">เพิ่มสมาชิก</h2>
                     <form class="p-3">
