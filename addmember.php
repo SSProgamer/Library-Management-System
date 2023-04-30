@@ -1,3 +1,16 @@
+<?php
+    require 'connection.php';
+    if($_POST['submit']){
+        mysqli_begin_transaction($con);
+        try{
+            mysqli_commit($con);
+        }catch (mysqli_sql_exception $exception) {
+            mysqli_rollback($con);
+            echo 'bruh';
+            throw $exception;
+        }
+    }
+?>
 <html>
 
 <head>

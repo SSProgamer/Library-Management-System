@@ -1,6 +1,6 @@
 <?php
 include('connection.php');
-mysqli_begin_transaction($con);
+
 $member = $_POST['memberid'];
 $start = $_POST['start'];
 $end = $_POST['end'];
@@ -21,6 +21,7 @@ if ($_POST['submit']) {
         }
         // echo 'ไม่มีหมายเลขสมาชิก';
     } else {
+        mysqli_begin_transaction($con);
         try {
             $sql = "INSERT INTO blacklist (Member_ID, Cause_Blacklist, Start_Date, End_Date)
 values ($member, $cause,$start, $end)";
@@ -28,7 +29,7 @@ values ($member, $cause,$start, $end)";
             mysqli_commit($con);
             echo 'good';
         } catch (mysqli_sql_exception $exception) {
-            mysqli_rollback($mysqli);
+            mysqli_rollback($con);
             echo 'bruh';
             throw $exception;
         }
