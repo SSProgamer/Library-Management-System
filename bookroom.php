@@ -16,19 +16,12 @@ if(isset($_POST['submit'])){
   $r_name = $_POST['roomname'];
 
   //check ว่า ในห้องนั้นมีคนจองในช่วงเวลาที่กรอกฟอร์มหรือยัง
-  $sql = "SELECT * FROM room_booking WHERE Room_ID = $room_id)";
+  $sql = "select * from Room_Booking where B_Date = $date and Start_Time >= $start and End_Time <= $end;";
   $check = mysqli_query($con, $sql);
 
-  if($check){
+  if(!$check){
     mysqli_begin_transaction($con);
-    //insert values (ยังไมไ่ด้check ว่ามีคนจองในระหว่างนั้นหรือเปล่า)
   try{
-    //หาเลขห้องจากชื่อห้อง
-    // $getroom = "SELECT Room_ID FROM room WHERE Room_Name like '%$r_name%'";
-
-    //begin transaction
-    
-    
     
     $sql = "INSERT INTO room_booking (Member_ID, Room_ID, RB_Date, Start_time, End_Time, Clause_Booking, Lib_ID)
   values ($member, $room_id, $date, $start, $end, $cause, 100)";

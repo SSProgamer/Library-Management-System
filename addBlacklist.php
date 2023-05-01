@@ -20,8 +20,9 @@ $name = $_POST['membername'];
             $member = $lol[0];
         }
         // echo 'ไม่มีหมายเลขสมาชิก';
-    } else {
-        mysqli_begin_transaction($con);
+    }
+    
+    mysqli_begin_transaction($con);
         try {
             $sql = "INSERT INTO blacklist (Member_ID, Cause_Blacklist, Start_Date, End_Date)
 values ($member, $cause,$start, $end)";
@@ -33,7 +34,6 @@ values ($member, $cause,$start, $end)";
             echo 'bruh';
             throw $exception;
         }
-    }
 }
 
 ?>

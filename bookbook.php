@@ -1,24 +1,29 @@
 <?php
     require 'connection.php';
     if(isset($_POST['submit'])){
-        if($book = ''){
-            $find = "SELECT * FROM book_list";
-     $found = mysqli_query($con, $find);
-     if($found){
-
-     }
-     else{
-        $book = null;
-     }
+    $member = $_POST['memberid'];
+    $book = $_POST['bookid'];
+    $bookname = $_POST['bookname'];
+    $admin = $_SESSION['admin'];
+    if ($book = '') {
+        $find = "SELECT Book_ID FROM book_list WHERE Book_Name = $bookname";
+        $found = mysqli_query($con, $find);
+        if ($found) {
+            $row = mysqli_fetch_row($found);
+            $book = $row[0];
+        } else {
+            $book = null;
+            echo 'ไม่พบหนังสือ';
         }
-     
-
-        mysqli_begin_transaction($con);
+    }
+        
+    mysqli_begin_transaction($con);
         try{
-            // $sql = "INSERT INTO appointment (Member_ID, Book_ID, Status, B_Date, R_Date, Lib_ID)
-            // VALUES ($member, $book, 'กำลังยืม', $start, $end, $_SESSION['admin'])";
+            $sql = "INSERT INTO appointment (Member_ID, Book_ID, B_Date, App_Date, Lib_ID)
+            VALUES ($member, $book, 'กำลังยืม', $start, $end, $admin)";
             mysqli_query($con, $sql);
             mysqli_commit($con);
+            echo 'success';
         }catch (mysqli_sql_exception $exception) {
             mysqli_rollback($con);
             echo 'bruh';
@@ -55,13 +60,13 @@
                             <div class="col">
                                 <div class="form-group pb-3">
                                     <label>รหัสหนังสือ</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="bookid">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group pb-3">
                                     <label>ชื่อหนังสือ</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="bookname">
                                 </div>
                             </div>
                         </div>

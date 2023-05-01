@@ -2,16 +2,23 @@
     require 'connection.php';
     if(isset($_POST['submit'])){
         //varible
-
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $dob = $_POST['dob'];
+        $phone = $_POST['tel'];
+        $gender = $_POST['gender'];
         //check เคยสมัครหรือยัง
-        $find = "SELECT * FROM `member` WHERE Name = '$name' "
+        $find = "SELECT * FROM `member` WHERE Name = '$name' || Email = '$email'";
         $found = mysqli_query($con,$find);
 
         //if not exist
         if(!$found){
             mysqli_begin_transaction($con);
         try{
+            $add = "INSERT INTO `member` (Name, Gender, Tel ,Email, Birth_Date)
+            VALUES ($name, $gender, $phone, $email, $dob)";
             mysqli_commit($con);
+            echo 'Add success';
         }catch (mysqli_sql_exception $exception) {
             mysqli_rollback($con);
             echo 'bruh';
@@ -50,13 +57,13 @@
                             <div class="col">
                                 <div class="form-group pb-3">
                                     <label>ชื่อ</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="name">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group pb-3">
                                     <label>เพศ</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="gender">
                                 </div>
                             </div>
                         </div>
@@ -64,13 +71,13 @@
                             <div class="col">
                                 <div class="form-group pb-3">
                                     <label>เบอร์โทร</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="tel">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group pb-3">
                                     <label>อีเมล</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="email">
                                 </div>
                             </div>
                         </div>
@@ -78,7 +85,7 @@
                             <div class="col-6">
                                 <div class="form-group pb-3">
                                     <label>วันเกิด</label>
-                                    <input type="date" class="form-control">
+                                    <input type="date" class="form-control" name="dob">
                                 </div>
                             </div>
                         </div>
