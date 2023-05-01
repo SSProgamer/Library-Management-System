@@ -6,7 +6,7 @@ include('connection.php');
 // $sql2 = "SELECT * FROM room";
 // $room = mysqli_query($con, $sql2);
 
-if($_POST['submit']){
+if(isset($_POST['submit'])){
   $member = $_POST['memberid'];
   $room_id = $_POST['roomid'];
   $date = $_POST['startdate'];

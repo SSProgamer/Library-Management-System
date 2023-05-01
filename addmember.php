@@ -1,7 +1,15 @@
 <?php
     require 'connection.php';
-    if($_POST['submit']){
-        mysqli_begin_transaction($con);
+    if(isset($_POST['submit'])){
+        //varible
+
+        //check เคยสมัครหรือยัง
+        $find = "SELECT * FROM `member` WHERE Name = '$name' "
+        $found = mysqli_query($con,$find);
+
+        //if not exist
+        if(!$found){
+            mysqli_begin_transaction($con);
         try{
             mysqli_commit($con);
         }catch (mysqli_sql_exception $exception) {
@@ -9,6 +17,11 @@
             echo 'bruh';
             throw $exception;
         }
+        }
+        else{
+            echo 'เคยมีแล้ว';
+        }
+        
     }
 ?>
 <html>

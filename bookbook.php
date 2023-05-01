@@ -1,8 +1,23 @@
 <?php
     require 'connection.php';
-    if($_POST['submit']){
+    if(isset($_POST['submit'])){
+        if($book = ''){
+            $find = "SELECT * FROM book_list";
+     $found = mysqli_query($con, $find);
+     if($found){
+
+     }
+     else{
+        $book = null;
+     }
+        }
+     
+
         mysqli_begin_transaction($con);
         try{
+            // $sql = "INSERT INTO appointment (Member_ID, Book_ID, Status, B_Date, R_Date, Lib_ID)
+            // VALUES ($member, $book, 'กำลังยืม', $start, $end, $_SESSION['admin'])";
+            mysqli_query($con, $sql);
             mysqli_commit($con);
         }catch (mysqli_sql_exception $exception) {
             mysqli_rollback($con);

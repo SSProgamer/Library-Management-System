@@ -1,6 +1,6 @@
 <?php
     include 'connection.php';
-    if($_POST['submit']){
+    if(isset($_POST['submit'])){
         $email = $_POST['email'];
         $find = "SELECT Lib_name, Lib_ID FROM librarian WHERE Lib_Email = '$email'";
         $check = mysqli_query($con, $find);

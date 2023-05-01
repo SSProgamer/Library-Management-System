@@ -1,10 +1,11 @@
 <?php 
     require 'connection.php';
     session_start();
-    if($_POST['logout']){
+    if(isset($_POST['logout'])){
         unset($_SESSION['admin']);
         unset($_SESSION['name']);
     }
+    
 ?>
 <html>
 

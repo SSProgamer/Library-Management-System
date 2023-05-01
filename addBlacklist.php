@@ -1,14 +1,14 @@
 <?php
 include('connection.php');
 
+
+//insert values (ยังไมไ่ด้check ว่ามีคนจองในระหว่างนั้นหรือเปล่า)
+if (isset($_POST['submit'])) {
 $member = $_POST['memberid'];
 $start = $_POST['start'];
 $end = $_POST['end'];
 $cause = $_POST['blacklistCause'];
 $name = $_POST['membername'];
-//insert values (ยังไมไ่ด้check ว่ามีคนจองในระหว่างนั้นหรือเปล่า)
-if ($_POST['submit']) {
-
     if (!$member) {
         $find = "SELECT Member_ID FROM `member` WHERE Name like '$name%'";
         $found = mysqli_query($con, $find);

@@ -3,7 +3,7 @@ include('connection.php');
 $query = "SELECT * FROM room";
 $result = mysqli_query($con,$query);
 
-if($_POST['submit']){
+if(isset($_POST['submit'])){
   $start = $_POST['start'];
   $end = $_POST['end'];
   $day = $_POST['day'];
