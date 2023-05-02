@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
         echo $sql;
         echo 'ไม่สำเร็จ';
         echo $exception;
-        throw $exception;
+        // throw $exception;
     }
 }
 ?>

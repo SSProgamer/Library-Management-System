@@ -1,5 +1,6 @@
 <?php
 include('connection.php');
+session_start();
 // $sql1 = "SELECT * FROM member";
 // $L_member = mysqli_query($con,$sql1);
 
@@ -14,6 +15,7 @@ if(isset($_POST['submit'])){
   $end = $_POST['endtime'];
   $cause = $_POST['cause'];
   $r_name = $_POST['roomname'];
+  $admin = $_SESSION['admin'];
 
   //check ว่า ในห้องนั้นมีคนจองในช่วงเวลาที่กรอกฟอร์มหรือยัง
   $sql = "select * from room_booking where B_Date = $date and Start_Time >= $start and End_Time <= $end;";
@@ -24,7 +26,7 @@ if(isset($_POST['submit'])){
     mysqli_begin_transaction($con);
   try{
     
-    $sql = "INSERT INTO room_booking (Member_ID, Room_ID, RB_Date, Start_time, End_Time, Clause_Booking, Lib_ID) values ($member, $room_id, $date, '$start', '$end', '$cause', 100);";
+    $sql = "INSERT INTO room_booking (Member_ID, Room_ID, B_Date, Start_time, End_Time, Cause, Lib_ID) values ($member, $room_id, '$date', '$start', '$end', '$cause', '$admin');";
     mysqli_query($con,$sql);
     mysqli_commit($con);
     echo 'good';

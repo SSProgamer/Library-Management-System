@@ -60,6 +60,9 @@
           <l1 class="p-2 border-top border-bottom side-menu"><a class="side-menu-link" href="blacklist.php">
               <h4 class="side-menu-text">รายชื่อ Blacklist</h4>
             </a></l1>
+            <l1 class="p-2 border-top border-bottom side-menu"><a class="side-menu-link" href="br_list.php">
+              <h4 class="side-menu-text">ข้อมูลการยืมคืนหนังสือ</h4>
+            </a></l1>
             <l1 class="p-2 border-top side-menu">
               <h4 class="side-menu-text">ยินดีต้อนรับคุณ <?php echo $_SESSION['name'];?></h4>
               <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">

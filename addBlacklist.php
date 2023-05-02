@@ -24,7 +24,7 @@ $name = $_POST['membername'];
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     mysqli_begin_transaction($con);
         try {
-            $sql = "INSERT INTO blacklist ('Member_ID', 'Cause_Blacklist', 'Start_Date', 'End_Date')
+            $sql = "INSERT INTO blacklist (Member_ID, Cause_Blacklist, Start_Date, End_Date)
 values ($member, '$cause','$start', '$end')";
             mysqli_query($con, $sql);
             mysqli_commit($con);
@@ -88,13 +88,13 @@ values ($member, '$cause','$start', '$end')";
                             <div class="col-6">
                                 <div class="m-4">
                                     <p>วันที่เริ่มบทลงโทษ</p>
-                                    <input class="w-100 form-control" type="text" name="start">
+                                    <input class="w-100 form-control" type="date" name="start">
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="m-4">
                                     <p>จำนวนมันที่ถูกลงโทษ</p>
-                                    <input class="w-100 form-control" type="text" name="end">
+                                    <input class="w-100 form-control" type="date" name="end">
                                 </div>
                             </div>
                         </div>

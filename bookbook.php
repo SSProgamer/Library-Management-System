@@ -4,10 +4,12 @@
     if(isset($_POST['submit'])){
     $member = $_POST['memberid'];
     $book = $_POST['bookid'];
-    echo $_POST['bookid'];
+    // echo $_POST['bookid'];
     $bookname = $_POST['bookname'];
     $admin = $_SESSION['admin'];
-    if ($book = '') {
+    $start = $_POST['startdate'];
+    $end = $_POST['enddate'];
+    if (!isset($_POST['bookid'])) {
         $find = "SELECT Book_ID FROM book_list WHERE Book_Name = $bookname";
         $found = mysqli_query($con, $find);
         if ($found) {
@@ -21,15 +23,15 @@
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     mysqli_begin_transaction($con);
         try{
-            $sql = "INSERT INTO appointment (Member_ID, Book_ID,`Status`, B_Date, App_Date, Lib_ID)
-            VALUES ($member, $book, 'กำลังยืม', '$start', '$end', $admin)";
+            $sql = "INSERT INTO appointment (Member_ID, Book_ID, B_Date, App_Date, Lib_ID)
+            VALUES ($member, $book, '$start', '$end', $admin)";
             mysqli_query($con, $sql);
             mysqli_commit($con);
             echo 'success';
         }catch (mysqli_sql_exception $exception) {
             mysqli_rollback($con);
-            echo 'bruh';
-            // throw $exception;
+            echo $sql;
+            echo $exception;
         }
     }
 ?>
