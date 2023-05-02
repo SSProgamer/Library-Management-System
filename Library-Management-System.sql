@@ -127,30 +127,33 @@ CREATE TABLE `Appointment` (
     KEY `AP_libid_FK` (`Lib_ID`),
   CONSTRAINT `AP_libid_FK` FOREIGN KEY (`Lib_ID`) REFERENCES `Librarian` (`Lib_ID`) ON DELETE CASCADE
 );
+INSERT INTO `Librarian` (`Lib_Name`, `Lib_Tel`, `Lib_Email`)
+VALUES ('นนทิวัฒน์ เพ็งพันธ์','0123456789','nonthiwaht@gmail.com'),('เพ็งพันธ์ นนทิวัฒน์','0987654321','pengpan@gmail.com');
 
-INSERT INTO `Book_List` (`Book_ID`, `Book_Name`, `Type_ID`, `ISBN`)
-VALUES (1,'nonthiwaht',1,00001),(2,'pengpan',2,00002);
+INSERT INTO `Member` (`Name`, `Gender`, `Tel`,`Email`, `Birth_Date`)
+VALUES ('ไซรัปบอย','ชาย','0123456789','syrupboy@gmail.com','2545-08-19'),('ไซรัปเกิล','หญิง','0874198753','syrupgirl@gmail.com','2545-08-20');
 
-INSERT INTO `Book_Type` (`Type_ID`, `Type_Name`)
-VALUES (1,'แฟนตาซี'),(2,'สยอง');
+INSERT INTO `Blacklist` (`Member_ID`, `Cause_Blacklist`, `Start_Date`,`End_Date`)
+VALUES (1,'ขโมยหนังสือ','2565-01-20','2565-08-20'),(2,'ฉีกหนังสือในห้องสมุด','2565-03-14','2566-03-14');
 
-INSERT INTO `Room_Booking` (`RB_ID`, `Member_ID`, `Room_ID`, `B_Date`,`Start_Time`, `End_Time`, `Cause`, `Lib_ID`)
-VALUES (1,1,1,'2565-02-23','2565-02-24','12:00','13:00','อยากนอนห้องนี้เลยจอง',1),(2,2,2,'2565-02-23','2565-02-24''12:00','13:00','กุว่างจบปะบรรณารักษ์ 1-1ได้อะ',2);
+INSERT INTO `Book_List` (`Book_Name`, `Type_ID`, `ISBN`)
+VALUES ('nonthiwaht',1,00001),('pengpan',2,00002);
 
-INSERT INTO `Room` (`Room_ID`, `Room_Name`)
-VALUES (1,'ห้องประชุม1'),(2,'ห้องประชุม2');
+INSERT INTO `Book_Type` (`Type_Name`)
+VALUES ('แฟนตาซี'),('สยอง');
+
+INSERT INTO `Room` ( `Room_Name`)
+VALUES ('ห้องประชุม1'),('ห้องประชุม2');
+
+INSERT INTO `Room_Booking` (`Member_ID`, `Room_ID`, `B_Date`,`Start_Time`, `End_Time`, `Cause`, `Lib_ID`)
+VALUES (1,1,'2565-02-24','12:00','13:00','อยากนอนห้องนี้เลยจอง',1),(2,2,'2565-02-23','12:00','13:00','กุว่างจบปะบรรณารักษ์ 1-1ได้อะ',2);
+
+
 
 INSERT INTO `Borrow_return` (`BR_ID`, `Member_ID`, `Book_ID`, `Status`,`B_Date`, `R_Date`, `Lib_ID`)
 VALUES (1,1,1,'คืนแล้ว','2565-01-20','2565-01-27',1),(2,2,2,'คืนแล้ว','2565-02-12','2565-02-19',1);
 
-INSERT INTO `Librarian` (`Lib_ID`, `Lib_Name`, `Lib_Name`, `Lib_Email`)
-VALUES (1,'นนทิวัฒน์ เพ็งพันธ์','0123456789','nonthiwaht@gmail.com'),(2,'เพ็งพันธ์ นนทิวัฒน์','0987654321','pengpan@gmail.com');
 
-INSERT INTO `Member` (`Member_ID`, `Name`, `Gender`, `Tel`,`Email`, `Birth_Date`)
-VALUES (1,'ไซรัปบอย','ชาย','0123456789','syrupboy@gmail.com','2545-08-19'),(2,'ไซรัปเกิล','หญิง','0874198753','syrupgirl@gmail.com','2545-08-20');
-
-INSERT INTO `Blacklist` (`BL_ID`, `Member_ID`, `Cause_Blacklist`, `Start_Date`,`End_Date`)
-VALUES (1,1,'ขโมยหนังสือ','2565-01-20','2565-08-20'),(2,2,'ฉีกหนังสือในห้องสมุด','2565-03-14','2566-03-14');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
