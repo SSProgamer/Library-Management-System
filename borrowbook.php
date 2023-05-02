@@ -17,6 +17,7 @@ if (isset($_POST['submit'])) {
             echo 'ไม่พบหนังสือ';
         }
     }
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     mysqli_begin_transaction($con);
     try {
         $admin = $_SESSION['admin'];

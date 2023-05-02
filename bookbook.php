@@ -16,7 +16,7 @@
             echo 'ไม่พบหนังสือ';
         }
     }
-        
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     mysqli_begin_transaction($con);
         try{
             $sql = "INSERT INTO appointment (Member_ID, Book_ID, B_Date, App_Date, Lib_ID)

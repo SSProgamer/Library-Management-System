@@ -21,18 +21,19 @@ $name = $_POST['membername'];
         }
         // echo 'ไม่มีหมายเลขสมาชิก';
     }
-    
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     mysqli_begin_transaction($con);
         try {
-            $sql = "INSERT INTO blacklist (Member_ID, Cause_Blacklist, Start_Date, End_Date)
-values ($member, $cause,$start, $end)";
+            $sql = "INSERT INTO blacklist ('Member_ID', 'Cause_Blacklist', 'Start_Date', 'End_Date')
+values ('$member', '$cause','$start', '$end')";
             mysqli_query($con, $sql);
             mysqli_commit($con);
             echo 'good';
         } catch (mysqli_sql_exception $exception) {
             mysqli_rollback($con);
-            echo 'bruh';
-            throw $exception;
+    echo $sql;
+    echo $exception;
+    // throw $exception;
         }
 }
 

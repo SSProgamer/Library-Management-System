@@ -16,22 +16,23 @@ if(isset($_POST['submit'])){
   $r_name = $_POST['roomname'];
 
   //check ว่า ในห้องนั้นมีคนจองในช่วงเวลาที่กรอกฟอร์มหรือยัง
-  $sql = "select * from Room_Booking where B_Date = $date and Start_Time >= $start and End_Time <= $end;";
+  $sql = "select * from room_Booking where B_Date = $date and Start_Time >= $start and End_Time <= $end;";
   $check = mysqli_query($con, $sql);
 
+  mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
   if(!$check){
     mysqli_begin_transaction($con);
   try{
     
-    $sql = "INSERT INTO room_booking (Member_ID, Room_ID, RB_Date, Start_time, End_Time, Clause_Booking, Lib_ID)
-  values ($member, $room_id, $date, $start, $end, $cause, 100)";
+    $sql = "INSERT INTO room_booking (Member_ID, Room_ID, RB_Date, Start_time, End_Time, Clause_Booking, Lib_ID) values ($member, $room_id, $date, '$start', '$end', '$cause', 100);";
     mysqli_query($con,$sql);
     mysqli_commit($con);
     echo 'good';
   }catch (mysqli_sql_exception $exception) {
-    mysqli_rollback($mysqli);
-    echo 'bruh';
-    throw $exception;
+    mysqli_rollback($con);
+    echo $sql;
+    echo $exception;
+    // throw $exception;
 }
   }
   else{

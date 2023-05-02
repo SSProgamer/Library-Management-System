@@ -9,20 +9,23 @@
         $gender = $_POST['gender'];
         //check เคยสมัครหรือยัง
         $find = "SELECT * FROM `member` WHERE Name = '$name' || Email = '$email'";
-        $found = mysqli_query($con,$find);
-
+        $finding = mysqli_query($con,$find);
+        $found = mysqli_num_rows($finding);
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
         //if not exist
         if(!$found){
             mysqli_begin_transaction($con);
         try{
-            $add = "INSERT INTO `member` (Name, Gender, Tel ,Email, Birth_Date)
-            VALUES ($name, $gender, $phone, $email, $dob)";
+            $add = "INSERT INTO `member` (`Name`, `Gender`, `Tel` ,`Email`, `Birth_Date`)
+            VALUES ('$name', '$gender', '$phone', '$email', '$dob')";
+            mysqli_query($con,$add);
             mysqli_commit($con);
             echo 'Add success';
         }catch (mysqli_sql_exception $exception) {
             mysqli_rollback($con);
-            echo 'bruh';
-            throw $exception;
+    echo $add;
+    echo $exception;
+    // throw $exception;
         }
         }
         else{
@@ -52,7 +55,7 @@
             <a href="index.php">กลับไปหน้าหลัก</a>
                 <div class="container side-bar bg-light bg-opacity-75">
                     <h2 class="p-3">เพิ่มสมาชิก</h2>
-                    <form class="p-3">
+                    <form class="p-3" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group pb-3">
