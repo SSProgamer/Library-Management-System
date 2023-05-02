@@ -25,7 +25,7 @@ $name = $_POST['membername'];
     mysqli_begin_transaction($con);
         try {
             $sql = "INSERT INTO blacklist ('Member_ID', 'Cause_Blacklist', 'Start_Date', 'End_Date')
-values ('$member', '$cause','$start', '$end')";
+values ($member, '$cause','$start', '$end')";
             mysqli_query($con, $sql);
             mysqli_commit($con);
             echo 'good';

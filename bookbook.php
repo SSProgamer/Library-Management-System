@@ -1,8 +1,10 @@
 <?php
     require 'connection.php';
+    session_start();
     if(isset($_POST['submit'])){
     $member = $_POST['memberid'];
     $book = $_POST['bookid'];
+    echo $_POST['bookid'];
     $bookname = $_POST['bookname'];
     $admin = $_SESSION['admin'];
     if ($book = '') {
@@ -19,15 +21,15 @@
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     mysqli_begin_transaction($con);
         try{
-            $sql = "INSERT INTO appointment (Member_ID, Book_ID, B_Date, App_Date, Lib_ID)
-            VALUES ($member, $book, 'กำลังยืม', $start, $end, $admin)";
+            $sql = "INSERT INTO appointment (Member_ID, Book_ID,`Status`, B_Date, App_Date, Lib_ID)
+            VALUES ($member, $book, 'กำลังยืม', '$start', '$end', $admin)";
             mysqli_query($con, $sql);
             mysqli_commit($con);
             echo 'success';
         }catch (mysqli_sql_exception $exception) {
             mysqli_rollback($con);
             echo 'bruh';
-            throw $exception;
+            // throw $exception;
         }
     }
 ?>
@@ -55,7 +57,7 @@
             <a href="index.php">กลับไปหน้าหลัก</a>
                 <div class="container side-bar bg-light bg-opacity-75">
                     <h2 class="p-3">จองหนังสือ</h2>
-                    <form class="p-3">
+                    <form class="p-3" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group pb-3">

@@ -1,32 +1,39 @@
 <?php
 require 'connection.php';
+session_start();
 if (isset($_POST['submit'])) {
-    $book = $_POST['book'];
+    
+    $book = $_POST['id'];
     $bookname = $_POST['bookname'];
     $member = $_POST['memberid'];
-
+    $start = $_POST['startdate'];
+    $end = $_POST['enddate'];
+    $admin = $_SESSION['admin'];
     //ถ้าหาว่ามีหนังสืออะเปล่า
-    if ($book = '') {
-        $find = "SELECT Book_ID FROM book_list WHERE Book_Name = $bookname";
-        $found = mysqli_query($con, $find);
-        if ($found) {
-            $row = mysqli_fetch_row($found);
-            $book = $row[0];
-        } else {
-            $book = null;
-            echo 'ไม่พบหนังสือ';
-        }
-    }
+    // if (isset($book)) {
+    //     $find = "SELECT Book_ID FROM book_list WHERE Book_Name = $bookname";
+    //     $found = mysqli_query($con, $find);
+    //     if ($found) {
+    //         $row = mysqli_fetch_row($found);
+    //         $book = $row[0];
+    //     } else {
+    //         $book = null;
+    //         echo 'ไม่พบหนังสือ';
+    //     }
+    // }
     mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     mysqli_begin_transaction($con);
     try {
         $admin = $_SESSION['admin'];
-         $sql = "INSERT INTO borrow_return (Member_ID, Book_ID, Status, B_Date, R_Date, Lib_ID)
-        VALUES ($member, $book, 'กำลังยืม', $start, $end, $admin)";
+         $sql = "INSERT INTO borrow_return (Member_ID, Book_ID, `Status`, B_Date, R_Date, Lib_ID)
+        VALUES ($member, $book, 'กำลังยืม', '$start', '$end', $admin)";
+        mysqli_query($con, $sql);
         mysqli_commit($con);
     } catch (mysqli_sql_exception $exception) {
         mysqli_rollback($con);
+        echo $sql;
         echo 'ไม่สำเร็จ';
+        echo $exception;
         throw $exception;
     }
 }
@@ -55,12 +62,12 @@ if (isset($_POST['submit'])) {
                 <a href="index.php">กลับไปหน้าหลัก</a>
                 <div class="container side-bar bg-light bg-opacity-75">
                     <h2 class="p-3">ยืมหนังสือ</h2>
-                    <form class="p-3">
+                    <form class="p-3" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <div class="row">
                             <div class="col">
                                 <div class="form-group pb-3">
                                     <label>รหัสหนังสือ</label>
-                                    <input type="text" class="form-control" name="book">
+                                    <input type="text" class="form-control" name="id" id="id">
                                 </div>
                             </div>
                             <div class="col">

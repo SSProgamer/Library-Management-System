@@ -24,8 +24,7 @@ CREATE TABLE `Book_List` (
   `Type_ID` integer(10) NOT NULL,
   `ISBN` Varchar(10) NOT NULL,
   PRIMARY KEY (`Book_ID`),
-  KEY `typeid_FK` (`Type_ID`),
-  CONSTRAINT `typeid_FK` FOREIGN KEY (`Type_ID`) REFERENCES `Book_Type` (`Type_ID`) ON DELETE CASCADE
+  FOREIGN KEY (`Type_ID`) REFERENCES `Book_Type` (`Type_ID`) 
 );
 
 DROP TABLE IF EXISTS `Book_Type`;
@@ -46,12 +45,10 @@ CREATE TABLE `Room_Booking` (
   `Cause` varchar(255) NOT NULL,
   `Lib_ID` integer(10) NOT NULL,
   PRIMARY KEY (`RB_ID`),
-  KEY `memberid_FK` (`Member_ID`),
-  CONSTRAINT `memberid_FK` FOREIGN KEY (`Member_ID`) REFERENCES `Member` (`Member_ID`) ON DELETE CASCADE,
-   KEY `roomid_FK` (`Room_ID`),
-  CONSTRAINT `roomid_FK` FOREIGN KEY (`Room_ID`) REFERENCES `Room` (`Room_ID`) ON DELETE CASCADE,
-  KEY `libid_FK` (`Lib_ID`),
-  CONSTRAINT `libid_FK` FOREIGN KEY (`Lib_ID`) REFERENCES `Librarian` (`Lib_ID`) ON DELETE CASCADE
+	FOREIGN KEY (`Member_ID`) REFERENCES `Member` (`Member_ID`) ,
+ FOREIGN KEY (`Room_ID`) REFERENCES `Room` (`Room_ID`) ,
+  
+FOREIGN KEY (`Lib_ID`) REFERENCES `Librarian` (`Lib_ID`) 
 );
 
 DROP TABLE IF EXISTS `Room`;
@@ -71,12 +68,10 @@ CREATE TABLE `Borrow_return` (
   `R_Date` date NOT NULL,
   `Lib_ID`int NOT NULL,
   PRIMARY KEY (`BR_ID`),
-   KEY `BR_memberid_FK` (`Member_ID`),
-  CONSTRAINT `BR_memberid_FK` FOREIGN KEY (`Member_ID`) REFERENCES `Member` (`Member_ID`) ON DELETE CASCADE,
-   KEY `BR_bookid_FK` (`Book_ID`),
-  CONSTRAINT `BR_bookid_FK` FOREIGN KEY (`Book_ID`) REFERENCES `Book_List` (`Book_ID`) ON DELETE CASCADE,
-  KEY `BR_libid_FK` (`Lib_ID`),
-  CONSTRAINT `BR_libid_FK` FOREIGN KEY (`Lib_ID`) REFERENCES `Librarian` (`Lib_ID`) ON DELETE CASCADE
+FOREIGN KEY (`Member_ID`) REFERENCES `Member` (`Member_ID`) ,
+ FOREIGN KEY (`Book_ID`) REFERENCES `Book_List` (`Book_ID`) ,
+ 
+  FOREIGN KEY (`Lib_ID`) REFERENCES `Librarian` (`Lib_ID`) 
 );
 
 DROP TABLE IF EXISTS `Librarian`;
@@ -107,8 +102,7 @@ CREATE TABLE `Blacklist` (
   `Start_Date` date NOT NULL,
   `End_Date` date NOT NULL,
   PRIMARY KEY (`BL_ID`),
-  KEY `BL_memberid_FK` (`Member_ID`),
-  CONSTRAINT `BL_memberid_FK` FOREIGN KEY (`Member_ID`) REFERENCES `Member` (`Member_ID`) ON DELETE CASCADE
+  FOREIGN KEY (`Member_ID`) REFERENCES `Member` (`Member_ID`) 
 );
 
 DROP TABLE IF EXISTS `Appointment`;
@@ -120,12 +114,12 @@ CREATE TABLE `Appointment` (
   `App_Date` date NOT NULL,
   `Lib_ID` integer(10),
   PRIMARY KEY (`App_ID`),
-  KEY `AP_memberid_FK` (`Member_ID`),
-  CONSTRAINT `AP_memberid_FK` FOREIGN KEY (`Member_ID`) REFERENCES `Member` (`Member_ID`) ON DELETE CASCADE,
-    KEY `AP_bookid_FK` (`Book_ID`),
-  CONSTRAINT `AP_bookid_FK` FOREIGN KEY (`Book_ID`) REFERENCES `Book_List` (`Book_ID`) ON DELETE CASCADE,
-    KEY `AP_libid_FK` (`Lib_ID`),
-  CONSTRAINT `AP_libid_FK` FOREIGN KEY (`Lib_ID`) REFERENCES `Librarian` (`Lib_ID`) ON DELETE CASCADE
+ 
+  FOREIGN KEY (`Member_ID`) REFERENCES `Member` (`Member_ID`) ,
+    
+  FOREIGN KEY (`Book_ID`) REFERENCES `Book_List` (`Book_ID`) ,
+   
+  FOREIGN KEY (`Lib_ID`) REFERENCES `Librarian` (`Lib_ID`) 
 );
 INSERT INTO `Librarian` (`Lib_Name`, `Lib_Tel`, `Lib_Email`)
 VALUES ('นนทิวัฒน์ เพ็งพันธ์','0123456789','nonthiwaht@gmail.com'),('เพ็งพันธ์ นนทิวัฒน์','0987654321','pengpan@gmail.com');
