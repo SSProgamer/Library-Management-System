@@ -30,7 +30,7 @@
         <h1>System</h1>
         <ul class="nav flex-column">
           
-            <?php if(!$_SESSION['admin']){
+            <?php if(!isset($_SESSION['admin'])){
                 ?>
           <l1 class="p-2 border-top side-menu"><a class="side-menu-link" href="login.php">
               <h4 class="side-menu-text">Login</h4>
