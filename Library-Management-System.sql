@@ -19,25 +19,25 @@
 
 DROP TABLE IF EXISTS `Book_List`;
 CREATE TABLE `Book_List` (
-  `Book_ID` integer(10),
+  `Book_ID` integer(10) AUTO_INCREMENT,
   `Book_Name` varchar(255) NOT NULL,
   `Type_ID` integer(10) NOT NULL,
   `ISBN` Varchar(10) NOT NULL,
   PRIMARY KEY (`Book_ID`),
   KEY `typeid_FK` (`Type_ID`),
   CONSTRAINT `typeid_FK` FOREIGN KEY (`Type_ID`) REFERENCES `Book_Type` (`Type_ID`) ON DELETE CASCADE
-)  AUTO_INCREMENT=14 ;
+);
 
 DROP TABLE IF EXISTS `Book_Type`;
 CREATE TABLE `Book_Type` (
-  `Type_ID` integer(10),
+  `Type_ID` integer(10) AUTO_INCREMENT,
   `Type_Name` Varchar(255),
   PRIMARY KEY (`Type_ID`)
-)  AUTO_INCREMENT=3 ;
+);
 
 DROP TABLE IF EXISTS `Room_Booking`;
 CREATE TABLE `Room_Booking` (
-  `RB_ID` integer(10),
+  `RB_ID` integer(10) AUTO_INCREMENT,
   `Member_ID` integer(10) NOT NULL,
   `Room_ID` integer(10) NOT NULL,
   `B_Date` date NOT NULL,
@@ -52,18 +52,18 @@ CREATE TABLE `Room_Booking` (
   CONSTRAINT `roomid_FK` FOREIGN KEY (`Room_ID`) REFERENCES `Room` (`Room_ID`) ON DELETE CASCADE,
   KEY `libid_FK` (`Lib_ID`),
   CONSTRAINT `libid_FK` FOREIGN KEY (`Lib_ID`) REFERENCES `Librarian` (`Lib_ID`) ON DELETE CASCADE
-)  AUTO_INCREMENT=3 ;
+);
 
 DROP TABLE IF EXISTS `Room`;
 CREATE TABLE `Room` (
-  `Room_ID` integer(10),
+  `Room_ID` integer(10) AUTO_INCREMENT,
   `Room_Name` varchar(255) NOT NULL,
   PRIMARY KEY (`Room_ID`)
-)  AUTO_INCREMENT=3 ;
+);
 
 DROP TABLE IF EXISTS `Borrow_return`;
 CREATE TABLE `Borrow_return` (
-  `BR_ID` int(10),
+  `BR_ID` int(10) AUTO_INCREMENT,
   `Member_ID` integer(10) NOT NULL,
   `Book_ID` integer(10) NOT NULL,
   `Status` varchar(255) NOT NULL,
@@ -77,31 +77,31 @@ CREATE TABLE `Borrow_return` (
   CONSTRAINT `BR_bookid_FK` FOREIGN KEY (`Book_ID`) REFERENCES `Book_List` (`Book_ID`) ON DELETE CASCADE,
   KEY `BR_libid_FK` (`Lib_ID`),
   CONSTRAINT `BR_libid_FK` FOREIGN KEY (`Lib_ID`) REFERENCES `Librarian` (`Lib_ID`) ON DELETE CASCADE
-)  AUTO_INCREMENT=3 ;
+);
 
 DROP TABLE IF EXISTS `Librarian`;
 CREATE TABLE `Librarian` (
-  `Lib_ID` integer(10),
+  `Lib_ID` integer(10) AUTO_INCREMENT,
   `Lib_Name` varchar(255) NOT NULL,
   `Lib_Tel` integer(10) NOT NULL,
   `Lib_Email` varchar(255) NOT NULL,
   PRIMARY KEY (`Lib_ID`)
-)  AUTO_INCREMENT=3 ;
+);
 
 DROP TABLE IF EXISTS `Member`;
 CREATE TABLE `Member` (
-  `Member_ID` integer(10),
+  `Member_ID` integer(10) AUTO_INCREMENT,
   `Name` varchar(255) NOT NULL,
   `Gender` varchar(255) NOT NULL,
   `Tel` varchar(255) NOT NULL,
   `Email` varchar(255) NOT NULL,
   `Birth_Date` date NOT NULL,
   PRIMARY KEY (`Member_ID`)
-)  AUTO_INCREMENT=3 ;
+);
 
 DROP TABLE IF EXISTS `Blacklist`;
 CREATE TABLE `Blacklist` (
-  `BL_ID` integer(10),
+  `BL_ID` integer(10) AUTO_INCREMENT,
   `Member_ID` integer(10) NOT NULL,
   `Cause_Blacklist` varchar(255) NOT NULL,
   `Start_Date` date NOT NULL,
@@ -109,11 +109,11 @@ CREATE TABLE `Blacklist` (
   PRIMARY KEY (`BL_ID`),
   KEY `BL_memberid_FK` (`Member_ID`),
   CONSTRAINT `BL_memberid_FK` FOREIGN KEY (`Member_ID`) REFERENCES `Member` (`Member_ID`) ON DELETE CASCADE
-)  AUTO_INCREMENT=3 ;
+);
 
 DROP TABLE IF EXISTS `Appointment`;
 CREATE TABLE `Appointment` (
-  `App_ID` integer(10),
+  `App_ID` integer(10) AUTO_INCREMENT,
   `Member_ID` integer(10) NOT NULL,
   `Book_ID` integer(10) NOT NULL,
   `B_Date` date NOT NULL,
@@ -126,7 +126,7 @@ CREATE TABLE `Appointment` (
   CONSTRAINT `AP_bookid_FK` FOREIGN KEY (`Book_ID`) REFERENCES `Book_List` (`Book_ID`) ON DELETE CASCADE,
     KEY `AP_libid_FK` (`Lib_ID`),
   CONSTRAINT `AP_libid_FK` FOREIGN KEY (`Lib_ID`) REFERENCES `Librarian` (`Lib_ID`) ON DELETE CASCADE
-)  AUTO_INCREMENT=3 ;
+);
 
 INSERT INTO `Book_List` (`Book_ID`, `Book_Name`, `Type_ID`, `ISBN`)
 VALUES (1,'nonthiwaht',1,00001),(2,'pengpan',2,00002);
